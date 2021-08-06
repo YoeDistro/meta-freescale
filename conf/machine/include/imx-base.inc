@@ -69,11 +69,11 @@ SPL_BINARY ??= "${@get_spl_binary(d)}"
 
 IMX_DEFAULT_MFGTOOL = "${@bb.utils.contains('IMX_DEFAULT_BOOTLOADER', 'u-boot-imx','u-boot-imx-mfgtool', 'u-boot-fslc', d)}"
 
-PREFERRED_PROVIDER_u-boot ??= "${IMX_DEFAULT_BOOTLOADER}"
-PREFERRED_PROVIDER_u-boot-mfgtool ??= "${IMX_DEFAULT_MFGTOOL}"
-PREFERRED_PROVIDER_virtual/bootloader ??= "${IMX_DEFAULT_BOOTLOADER}"
+PREFERRED_PROVIDER:u-boot ??= "${IMX_DEFAULT_BOOTLOADER}"
+PREFERRED_PROVIDER:u-boot-mfgtool ??= "${IMX_DEFAULT_MFGTOOL}"
+PREFERRED_PROVIDER:virtual/bootloader ??= "${IMX_DEFAULT_BOOTLOADER}"
 
-PREFERRED_PROVIDER_u-boot-mxsboot-native ??= "u-boot-fslc-mxsboot-native"
+PREFERRED_PROVIDER:u-boot-mxsboot-native ??= "u-boot-fslc-mxsboot-native"
 
 UBOOT_ENTRYPOINT:mxs    = "0x40008000"
 UBOOT_ENTRYPOINT:mx51   = "0x90008000"
@@ -96,7 +96,7 @@ UBOOT_ENTRYPOINT:vf = "0x80008000"
 UBOOT_PROVIDES_BOOT_CONTAINER = "0"
 UBOOT_PROVIDES_BOOT_CONTAINER:imx-boot-container = "1"
 
-PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+PREFERRED_PROVIDER:virtual/xserver = "xserver-xorg"
 XSERVER_DRIVER                  = "xf86-video-fbdev"
 XSERVER_DRIVER:imxgpu2d         = "xf86-video-imx-vivante"
 XSERVER_DRIVER:vf               = "xf86-video-modesetting"
@@ -204,7 +204,7 @@ MACHINE_SOCARCH_SUFFIX:mx8dxl = "-mx8dxl"
 MACHINE_SOCARCH_SUFFIX:use-mainline-bsp = "-imx"
 
 MACHINE_ARCH_FILTER = "virtual/kernel"
-MACHINE_SOCARCH_FILTER:append_imx = " \
+MACHINE_SOCARCH_FILTER:append:imx = " \
     alsa-lib \
     gstreamer1.0 \
     weston \
@@ -334,11 +334,11 @@ MACHINE_GSTREAMER_1_0_PLUGIN:mx8mq  ?= "imx-gst1.0-plugin"
 MACHINE_GSTREAMER_1_0_PLUGIN:mx8qm  ?= "imx-gst1.0-plugin"
 MACHINE_GSTREAMER_1_0_PLUGIN:mx8qxp ?= "imx-gst1.0-plugin"
 
-PREFERRED_VERSION_gstreamer1.0:mx8 ?= "1.16.2.imx"
-PREFERRED_VERSION_gstreamer1.0-plugins-base:mx8 ?= "1.16.2.imx"
-PREFERRED_VERSION_gstreamer1.0-plugins-good:mx8 ?= "1.16.3.imx"
-PREFERRED_VERSION_gstreamer1.0-plugins-bad:mx8 ?= "1.16.3.imx"
-PREFERRED_VERSION_gstreamer1.0-libav:mx8 ?= "1.16.0"
+PREFERRED_VERSION:gstreamer1.0:mx8 ?= "1.16.2.imx"
+PREFERRED_VERSION:gstreamer1.0-plugins-base:mx8 ?= "1.16.2.imx"
+PREFERRED_VERSION:gstreamer1.0-plugins-good:mx8 ?= "1.16.3.imx"
+PREFERRED_VERSION:gstreamer1.0-plugins-bad:mx8 ?= "1.16.3.imx"
+PREFERRED_VERSION:gstreamer1.0-libav:mx8 ?= "1.16.0"
 
 # Determines if the SoC has support for Vivante kernel driver
 SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT        = "0"
@@ -350,40 +350,40 @@ SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT:imxgpu = "1"
 MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT ?= "${SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT}"
 
 # Graphics libraries
-PREFERRED_PROVIDER_virtual/egl      ?= "mesa"
-PREFERRED_PROVIDER_virtual/libgl    ?= "mesa"
-PREFERRED_PROVIDER_virtual/libgles1 ?= "mesa"
-PREFERRED_PROVIDER_virtual/libgles2 ?= "mesa"
+PREFERRED_PROVIDER:virtual/egl      ?= "mesa"
+PREFERRED_PROVIDER:virtual/libgl    ?= "mesa"
+PREFERRED_PROVIDER:virtual/libgles1 ?= "mesa"
+PREFERRED_PROVIDER:virtual/libgles2 ?= "mesa"
 
-PREFERRED_PROVIDER_virtual/egl_imxgpu        ?= "imx-gpu-viv"
-PREFERRED_PROVIDER_virtual/libgl_imxgpu3d    ?= "imx-gpu-viv"
-PREFERRED_PROVIDER_virtual/libgles1_imxgpu3d ?= "imx-gpu-viv"
-PREFERRED_PROVIDER_virtual/libgles2_imxgpu3d ?= "imx-gpu-viv"
-PREFERRED_PROVIDER_virtual/libg2d            ?= "imx-gpu-g2d"
-PREFERRED_PROVIDER_virtual/libg2d_imxdpu     ?= "imx-dpu-g2d"
-PREFERRED_PROVIDER_opencl-clhpp:imxgpu       ?= "imx-gpu-viv"
-PREFERRED_PROVIDER_opencl-headers:imxgpu     ?= "imx-gpu-viv"
-PREFERRED_PROVIDER_opencl-icd-loader:imxgpu  ?= "imx-gpu-viv"
+PREFERRED_PROVIDER:virtual/egl:imxgpu        ?= "imx-gpu-viv"
+PREFERRED_PROVIDER:virtual/libgl:imxgpu3d    ?= "imx-gpu-viv"
+PREFERRED_PROVIDER:virtual/libgles1:imxgpu3d ?= "imx-gpu-viv"
+PREFERRED_PROVIDER:virtual/libgles2:imxgpu3d ?= "imx-gpu-viv"
+PREFERRED_PROVIDER:virtual/libg2d            ?= "imx-gpu-g2d"
+PREFERRED_PROVIDER:virtual/libg2d:imxdpu     ?= "imx-dpu-g2d"
+PREFERRED_PROVIDER:opencl-clhpp:imxgpu       ?= "imx-gpu-viv"
+PREFERRED_PROVIDER:opencl-headers:imxgpu     ?= "imx-gpu-viv"
+PREFERRED_PROVIDER:opencl-icd-loader:imxgpu  ?= "imx-gpu-viv"
 
-PREFERRED_VERSION_weston_imx ?= "9.0.0.imx"
-PREFERRED_VERSION_weston:use-mainline-bsp = ""
+PREFERRED_VERSION:weston:imx ?= "9.0.0.imx"
+PREFERRED_VERSION:weston:use-mainline-bsp = ""
 
-PREFERRED_VERSION_wayland-protocols:mx6 ?= "1.20.imx"
-PREFERRED_VERSION_wayland-protocols:mx7 ?= "1.20.imx"
-PREFERRED_VERSION_wayland-protocols:mx8 ?= "1.20.imx"
+PREFERRED_VERSION:wayland-protocols:mx6 ?= "1.20.imx"
+PREFERRED_VERSION:wayland-protocols:mx7 ?= "1.20.imx"
+PREFERRED_VERSION:wayland-protocols:mx8 ?= "1.20.imx"
 
 # Use i.MX libdrm Version
-PREFERRED_VERSION_libdrm:mx6 ?= "2.4.102.imx"
-PREFERRED_VERSION_libdrm:mx7 ?= "2.4.102.imx"
-PREFERRED_VERSION_libdrm:mx8 ?= "2.4.102.imx"
+PREFERRED_VERSION:libdrm:mx6 ?= "2.4.102.imx"
+PREFERRED_VERSION:libdrm:mx7 ?= "2.4.102.imx"
+PREFERRED_VERSION:libdrm:mx8 ?= "2.4.102.imx"
 
 # Use i.MX optee Version
-PREFERRED_VERSION_optee-os:mx8     ?= "3.10.0.imx"
-PREFERRED_VERSION_optee-client:mx8 ?= "3.10.0.imx"
-PREFERRED_VERSION_optee-test:mx8   ?= "3.10.0.imx"
+PREFERRED_VERSION:optee-os:mx8     ?= "3.10.0.imx"
+PREFERRED_VERSION:optee-client:mx8 ?= "3.10.0.imx"
+PREFERRED_VERSION:optee-test:mx8   ?= "3.10.0.imx"
 
 #Use i.MX opencv Version for mx8
-PREFERRED_VERSION_opencv:mx8 ?= "4.5.2.imx"
+PREFERRED_VERSION:opencv:mx8 ?= "4.5.2.imx"
 
 # Handle default kernel
 IMX_DEFAULT_KERNEL = "linux-fslc-imx"
@@ -398,7 +398,7 @@ IMX_DEFAULT_KERNEL:mx6ul = "linux-fslc-imx"
 IMX_DEFAULT_KERNEL:mx6ull = "linux-fslc-imx"
 IMX_DEFAULT_KERNEL:use-mainline-bsp = "linux-fslc"
 
-PREFERRED_PROVIDER_virtual/kernel ??= "${IMX_DEFAULT_KERNEL}"
+PREFERRED_PROVIDER:virtual/kernel ??= "${IMX_DEFAULT_KERNEL}"
 
 SOC_DEFAULT_IMAGE_FSTYPES = "wic.bmap wic.gz"
 SOC_DEFAULT_IMAGE_FSTYPES:mxs = "uboot-mxsboot-sdcard wic.bmap wic.gz"
@@ -474,7 +474,7 @@ KERNEL_IMAGETYPE:aarch64 = "Image"
 
 MACHINE_FEATURES = "usbgadget usbhost vfat alsa touchscreen"
 
-# Add the ability to specify _imx machines
+# Add the ability to specify imx machines
 MACHINEOVERRIDES =. "imx:"
 
 HOSTTOOLS_NONFATAL:append:mx8 = " sha384sum"
